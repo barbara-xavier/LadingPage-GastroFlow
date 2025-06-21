@@ -1,39 +1,30 @@
-$(document).ready(function() {
+$(document).ready(function () {
+    // Menu mobile toggle
     $('#mobile_btn').on('click', function () {
         $('#mobile_menu').toggleClass('active');
         $('#mobile_btn').find('i').toggleClass('fa-x');
     });
 
-    const sections = $('section');
-    const navItems = $('.nav-item');
-
+    // Atualiza a navegação ativa com base na seção visível
     $(window).on('scroll', function () {
-        const header = $('header');
-        const scrollPosition = $(window).scrollTop() - header.outerHeight();
+        const scrollPosition = $(window).scrollTop() + 100; // ajuste para considerar altura do header
 
-        let activeSectionIndex = 0;
+        let currentSectionId = '';
 
-        if (scrollPosition <= 0) {
-            header.css('box-shadow', 'none');
-        } else {
-            header.css('box-shadow', '5px 1px 5px rgba(0, 0, 0, 0.1');
-        }
+        $('section').each(function () {
+            const sectionTop = $(this).offset().top;
+            const sectionHeight = $(this).outerHeight();
 
-        sections.each(function(i) {
-            const section = $(this);
-            const sectionTop = section.offset().top - 96;
-            const sectionBottom = sectionTop+ section.outerHeight();
-
-            if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-                activeSectionIndex = i;
-                return false;
+            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                currentSectionId = $(this).attr('id');
             }
-        })
+        });
 
-        navItems.removeClass('active');
-        $(navItems[activeSectionIndex]).addClass('active');
+        $('.nav-item').removeClass('active');
+        $('.nav-item a[href="#' + currentSectionId + '"]').parent().addClass('active');
     });
 
+    // Animações com ScrollReveal
     ScrollReveal().reveal('#cta', {
         origin: 'left',
         duration: 2000,
@@ -50,17 +41,17 @@ $(document).ready(function() {
         origin: 'left',
         duration: 1000,
         distance: '20%'
-    })
+    });
 
     ScrollReveal().reveal('.feedback', {
         origin: 'right',
         duration: 1000,
         distance: '20%'
-    })
+    });
 
-     ScrollReveal().reveal('.pessoas', {
+    ScrollReveal().reveal('.pessoas', {
         origin: 'right',
         duration: 1000,
         distance: '20%'
-    })
+    });
 });

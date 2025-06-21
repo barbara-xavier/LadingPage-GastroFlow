@@ -37,6 +37,7 @@ body {
 
 section {
     padding: 28px 8%;
+    scroll-margin-top: 100px; /* ou o tamanho do seu header */
 }
 
 .btn-default {
