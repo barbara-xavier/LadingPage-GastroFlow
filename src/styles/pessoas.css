@@ -106,7 +106,8 @@
     }
 
     .pessoas {
-        flex-direction: column;
+        /*flex-direction: column;*/
+        justify-content: center;
     }
 } 
 
@@ -114,5 +115,6 @@
     .pessoas {
         flex: 1 1 100%;
         max-width: 100%;
+        justify-content: center;
     }
 }
